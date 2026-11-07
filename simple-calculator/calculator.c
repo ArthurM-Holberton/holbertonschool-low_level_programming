@@ -94,6 +94,25 @@ void multiply(void)
 }
 
 /**
+ * divide - asks for two numbers and prints their quotient
+ *
+ * Description: prints an error instead of dividing when B is zero
+ *
+ * Return: void
+ */
+void divide(void)
+{
+	double a, b;
+
+	if (!read_number("A: ", &a) || !read_number("B: ", &b))
+		printf("Invalid input\n");
+	else if (b == 0)
+		printf("Error: division by zero\n");
+	else
+		printf("Result: %.10g\n", a / b);
+}
+
+/**
  * main - Entry point
  *
  * Description: displays a menu in a loop, runs the chosen operation
@@ -128,7 +147,7 @@ int main(void)
 		else if (choice == 3)
 			multiply();
 		else if (choice == 4)
-			printf("Not implemented yet\n");
+			divide();
 		else if (choice != 0)
 			printf("Invalid choice\n");
 	}

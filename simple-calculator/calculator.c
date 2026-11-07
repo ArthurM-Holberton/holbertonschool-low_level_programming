@@ -16,16 +16,30 @@ void print_menu(void)
 }
 
 /**
+ * clear_line - discards the rest of the current input line
+ *
+ * Return: void
+ */
+void clear_line(void)
+{
+	int c;
+
+	c = getchar();
+	while (c != '\n' && c != EOF)
+		c = getchar();
+}
+
+/**
  * main - Entry point
  *
- * Description: prints a welcome line, then displays a menu until the user
- * chooses 0 to quit
+ * Description: displays a menu in a loop, rejects invalid choices
+ * and stops when the user chooses 0
  *
  * Return: Always 0 (Success)
  */
 int main(void)
 {
-	int choice;
+	int choice, ret;
 
 	printf("Simple Calculator\n");
 	choice = -1;
@@ -33,11 +47,20 @@ int main(void)
 	while (choice != 0)
 	{
 		print_menu();
-		if (scanf("%d", &choice) != 1)
+		ret = scanf("%d", &choice);
+		if (ret == EOF)
 			break;
 
-		if (choice != 0)
+		if (ret != 1)
+		{
+			clear_line();
+			choice = -1;
+		}
+
+		if (choice >= 1 && choice <= 4)
 			printf("Not implemented yet\n");
+		else if (choice != 0)
+			printf("Invalid choice\n");
 	}
 
 	printf("Bye!\n");

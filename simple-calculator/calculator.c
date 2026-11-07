@@ -64,6 +64,21 @@ void add(void)
 }
 
 /**
+ * subtract - asks for two numbers and prints their difference
+ *
+ * Return: void
+ */
+void subtract(void)
+{
+	double a, b;
+
+	if (read_number("A: ", &a) && read_number("B: ", &b))
+		printf("Result: %.10g\n", a - b);
+	else
+		printf("Invalid input\n");
+}
+
+/**
  * main - Entry point
  *
  * Description: displays a menu in a loop, runs the chosen operation
@@ -93,7 +108,9 @@ int main(void)
 
 		if (choice == 1)
 			add();
-		else if (choice >= 2 && choice <= 4)
+		else if (choice == 2)
+			subtract();
+		else if (choice >= 3 && choice <= 4)
 			printf("Not implemented yet\n");
 		else if (choice != 0)
 			printf("Invalid choice\n");

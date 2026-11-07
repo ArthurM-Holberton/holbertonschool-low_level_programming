@@ -30,9 +30,43 @@ void clear_line(void)
 }
 
 /**
+ * read_number - prompts for a number and reads it
+ * @label: the prompt to display
+ * @value: where the number read is stored
+ *
+ * Return: 1 on success, 0 if the input is not a number
+ */
+int read_number(char *label, double *value)
+{
+	int ret;
+
+	printf("%s", label);
+	ret = scanf("%lf", value);
+	if (ret != 1)
+		clear_line();
+
+	return (ret == 1);
+}
+
+/**
+ * add - asks for two numbers and prints their sum
+ *
+ * Return: void
+ */
+void add(void)
+{
+	double a, b;
+
+	if (read_number("A: ", &a) && read_number("B: ", &b))
+		printf("Result: %.10g\n", a + b);
+	else
+		printf("Invalid input\n");
+}
+
+/**
  * main - Entry point
  *
- * Description: displays a menu in a loop, rejects invalid choices
+ * Description: displays a menu in a loop, runs the chosen operation
  * and stops when the user chooses 0
  *
  * Return: Always 0 (Success)
@@ -57,7 +91,9 @@ int main(void)
 			choice = -1;
 		}
 
-		if (choice >= 1 && choice <= 4)
+		if (choice == 1)
+			add();
+		else if (choice >= 2 && choice <= 4)
 			printf("Not implemented yet\n");
 		else if (choice != 0)
 			printf("Invalid choice\n");
